@@ -1,0 +1,30 @@
+
+; Z Probing macro
+
+
+;This Macro is to be used with an active low touch probe.
+;It DOES NOT Require adjustment for different endmill sizes.
+
+; Z offset = 5.06 mm
+
+
+
+M400                                ; wait for current movement to finish
+
+M291 P"Make sure the probe is connected and the Endmill is on top of the probe" R"Warning" S3   ; warning message
+
+G91                                 ; set relative position
+M563 P999 S"Z-Probe"                ; Set tool 999 as "Z-Probe"
+
+G1 Z5 F500                          ; move up 5mm
+T999                                ; select tool #999 (probe)
+M585 Z10 E3 L0 F250 S1              ; Probe Z to an expected 10mm, active low trigger (L0), Endstop #3 (E3)
+T-1                                 ; deselect probe
+M400                                ; wait for current movement to finish
+G10 L20 Z5.06                       ; set Z offset to 5.06
+G1 Z10 F500                          ; move upward by 10mm
+G1 X0 Y0 F500                       ; go to X=0 Y=0
+
+M563 P999 D-1 H-1                   ; Remove tool #999
+
+M291 P"Probing complete on the CURRENT WCS. Please remove probe." R"Success" S1    ; screen message

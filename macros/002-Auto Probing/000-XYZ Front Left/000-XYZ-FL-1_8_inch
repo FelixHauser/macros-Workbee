@@ -1,0 +1,61 @@
+
+; XYZ Probing macro for FRONT LEFT CORNER with a 1/8" Endmill
+
+
+;This Macro is to be used with an active low touch probe.
+;It DOES Require adjustment for different endmill sizes.
+;It DOES require adjustments for different probe sizes. Please see comments below.
+
+; X offset = 10.08 mm
+; Y offset = 10.08 mm
+; Z offset = 5.06 mm
+; Endmill diameter 1/8" = 3.175mm
+; Endmill radius = 1.5875mm
+
+
+M400                               ; wait for current movement to finish
+
+M291 P"Make sure the probe is connected and is on the FRONT LEFT CORNER." R"Warning" S3   ; warning message
+
+
+G91                                 ; set relative position
+M563 P999 S"XYZ-Probe"              ; Set tool 999 as "XYZ-Probe"
+
+G1 Z5 F500                          ; move up 5mm
+G1 X19.92 Y19.92 F500               ; move 19.92mm to the right (+X) and 19.92mm to the back (+Y)
+T999                                ; select tool #999 (probe)
+M585 Z10 E3 L0 F250 S1              ; Probe Z to an expected 10mm, active low trigger (L0), Endstop #3 (E3)
+T-1                                 ; deselect probe
+M400                                ; wait for current movement to finish
+G10 L20 Z5.06                       ; set Z offset to 5.06 in the CURRENT WCS
+G1 Z5 F500                          ; move upward by 5mm
+
+G1 X-36.5875 F500                   ; get to the left of the probe
+G1 Z-10 F500                        ; dive by 10mm
+T999                                ; select tool #999 (probe)
+M585 X10 E3 L0 F500 S0              ; probe X
+T-1                                 ; deselect tool
+M400                                ; wait for current movement to finish
+G10 L20 X-11.6675                   ; set X offset   (10.08 + 1.5875)     ATTENTION, set correct endmill size !!!
+G1 X-5 F500                         ; back up by 5mm
+G1 Z10 F500                         ; go up by 10mm
+G1 X35 Y-36.5875 F500               ; go to the front of the probe
+
+G1 Z-10 F500                        ; dive by 10mm
+T999                                ; select tool #999 (probe)
+
+M585 Y10 E3 L0 F500 S0              ; probe Y
+T-1                                 ; deselect tool
+M400                                ; wait for current movement to finish
+G10 L20 Y-11.6675                   ; set Y offset   (10.08 + 1.5875)     ATTENTION, set correct endmill size !!!
+G1 Y-5 F500                         ; back up by 5mm
+M400                                ; wait for current movement to finish
+M500                                ; store data
+G1 Z10 F500                         ; go up by 10mm
+G1 X-19.92 F500                     ; go to the left by 19.92mm
+G90                                 ; set absolute coordinates
+G1 X0 Y0 F500                       ; go to X=0 Y=0
+
+M563 P999 D-1 H-1                   ; Remove tool #999
+
+M291 P"Probing complete on the CURRENT WCS. Please remove probe." R"Success" S1    ; screen message

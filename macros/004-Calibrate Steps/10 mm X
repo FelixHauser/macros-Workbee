@@ -1,0 +1,4 @@
+G91		; Relative Coordinates
+G1 X10 F30	; Move +10mm at 0,5mm/s
+G4 S10		; wait 10 seconds
+G1 X-10 F30	; return to origen

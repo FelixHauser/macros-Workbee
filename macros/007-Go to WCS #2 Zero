@@ -1,0 +1,6 @@
+G54                       ; coordinate system #1 (from G54 to G59)
+G0 Z94                    ; Move to Z max
+
+G55                       ; coordinate system #2  (Work)
+G1 X0 Y0 F1500            ; go to X=0, Y=0
+;G1 Z0 F1500
