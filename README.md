@@ -39,6 +39,6 @@ Change to the machine coordinate system
 
 Change to the most usual Work Coordinate System
 
-##Go to WCS 2 Zero
+## Go to WCS 2 Zero
 
 Move the tool to the origin of the WCS 2 (only on the X and Y axis)
