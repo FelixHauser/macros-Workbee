@@ -8,7 +8,7 @@
 
 ; X offset = 10.08 mm
 ; Y offset = 10.08 mm
-; Z offset = 5.06 mm
+; Z offset = 5.145 mm
 ; Endmill diameter 3.00 mm
 ; Endmill radius = 1.50 mm
 
@@ -27,7 +27,7 @@ T999                                ; select tool #999 (probe)
 M585 Z10 E3 L0 F250 S1              ; Probe Z to an expected 10mm, active low trigger (L0), Endstop #3 (E3)
 T-1                                 ; deselect probe
 M400                                ; wait for current movement to finish
-G10 L20 Z5.06                       ; set Z offset to 5.06
+G10 L20 Z5.145                       ; set Z offset to 5.145
 G1 Z5 F500                          ; move upward by 5mm
 
 G1 X-36.5875 F500                   ; get to the left of the probe
