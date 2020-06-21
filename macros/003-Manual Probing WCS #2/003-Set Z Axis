@@ -1,4 +1,0 @@
-G10 P2 L20 Z0   ; Sets new zero on WCS #2
-G55             ; switches to WCS #2
-M500            ; save on memory
-G1 Z10          ; lift Z by 10 mm

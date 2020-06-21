@@ -1,0 +1,6 @@
+G10 P2 L20 X0 Y0 Z0   ; Sets new zero on WCS #1
+G54                   ; switches to WCS #1
+M500
+G1 Z10          ; lift Z by 10 mm
+
+;G10 L20 X0 Y0 Z0 would set the offsets to the current WCS

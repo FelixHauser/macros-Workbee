@@ -1,0 +1,3 @@
+G10 P1 L20 X0     ; Sets new zero on WCS #1
+G54               ; switches to WCS #1
+M500
